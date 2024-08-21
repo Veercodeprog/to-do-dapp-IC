@@ -1,3 +1,14 @@
+type Todo = record {
+    "id": nat32;
+    "text": text;
+    "completed": bool;
+};
+
 service : {
-    "greet": (text) -> (text) query;
+     greet: (text) -> (text) query;
+     add: (text :text) -> (Todo);
+     remove: (id: nat32) -> (opt Todo);
+     get: (id: nat32) -> (opt Todo) query;
+     update: ( id: nat32,  text: opt text, completed: opt bool) -> (opt Todo);
+     paginate: (offset: nat32, limit: nat32) -> (vec Todo) query;
 }
