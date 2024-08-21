@@ -1,5 +1,4 @@
 use candid::CandidType;
-use ic_cdk::api::call;
 use serde::{Deserialize, Serialize};
 
 use ic_cdk::storage;
@@ -92,11 +91,4 @@ fn paginate(offset: u32, limit: u32) -> Vec<Todo> {
 #[ic_cdk::update]
 fn update(id: u32, text: Option<String>, completed: Option<bool>) -> Option<Todo> {
     STATE.with(|state| state.borrow_mut().update_todo_by_id(id, text, completed))
-}
-#[ic_cdk::update]
-fn deposit_cycles() -> Result<(), String> {
-    let cycles = call::read_cycles();
-    // Store or use `cycles` as needed
-    println!("Cycles deposited: {}", cycles);
-    Ok(())
 }
